@@ -1,51 +1,36 @@
 package prGookVar17;
 
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-
-import java.beans.IntrospectionException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
-import java.util.StringJoiner;
 
 /**
  * Created by Александра on 25.02.2017.
  */
 public class DecimalFractionalNumber {
-    int i;
-    float f;
-    long l;
-    double d;
     char sing;
-    String fraction, integer;
     String str;
     String[] number;
     ArrayList<Integer> numberInteger, numberFraction;
 
     public DecimalFractionalNumber(String str) {
         this.str = str;
-        fraction = "0";
-        integer = "0";
         numberFraction = new ArrayList<>();
         numberInteger = new ArrayList<>();
         number = str.split("(?<=\\G.{1})");
         String[] IntFraction = str.split("\\.");
         if (IntFraction.length == 1) {
-            integer = IntFraction[0];
             try {
-                int flag = Integer.parseInt(integer);
+                int flag = Integer.parseInt(IntFraction[0]);
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("Неверный формат числа");
             }
         } else {
             if (IntFraction.length != 2) throw new NumberFormatException("Неверный формат числа");
             else {
-                fraction = IntFraction[1];
-                integer = IntFraction[0];
                 try {
-                    int flag = Integer.parseInt(integer);
-                    flag = Integer.parseInt(fraction);
+                    int flag = Integer.parseInt(IntFraction[0]);
+                    flag = Integer.parseInt(IntFraction[1]);
                 } catch (NumberFormatException e) {
                     throw new NumberFormatException("Неверный формат числа");
                 }
@@ -61,204 +46,67 @@ public class DecimalFractionalNumber {
                 if (i != 0)
                     flag = 1;
             } else {
-                if (flag == 0)
+                if (flag == 0) {
                     numberInteger.add(Integer.parseInt(number[i]));
+                }
                 else numberFraction.add(Integer.parseInt(number[i]));
             }
         }
     }
 
     public DecimalFractionalNumber(int i) {
-        this.i = i;
-        fraction = "0";
-        integer = "0";
-        str = "";
-        str += i;
-        numberFraction = new ArrayList<>();
-        numberInteger = new ArrayList<>();
-        number = str.split("(?<=\\G.{1})");
-        String[] IntFraction = str.split("\\.");
-        if (IntFraction.length == 1) {
-            integer = IntFraction[0];
-            try {
-                int flag = Integer.parseInt(integer);
-            } catch (NumberFormatException e) {
-                throw new NumberFormatException("Неверный формат числа");
-            }
-        } else {
-            if (IntFraction.length != 2) throw new NumberFormatException("Неверный формат числа");
-            else {
-                fraction = IntFraction[1];
-                integer = IntFraction[0];
-                try {
-                    int flag = Integer.parseInt(integer);
-                    flag = Integer.parseInt(fraction);
-                } catch (NumberFormatException e) {
-                    throw new NumberFormatException("Неверный формат числа");
-                }
-            }
-        }
-        if (number[0].equals("-")) {
-            sing = '-';
-            number[0] = ".";
-        } else sing = '+';
-        int flag = 0;
-        for (int k = 0; k < number.length; k++) {
-            if (number[k].equals(".")) {
-                if (k != 0)
-                    flag = 1;
-            } else {
-                if (flag == 0)
-                    numberInteger.add(Integer.parseInt(number[k]));
-                else numberFraction.add(Integer.parseInt(number[k]));
-            }
-        }
-
+        String str1 = "";
+        str1 += i;
+        this.str = str1;
+        DecimalFractionalNumber k = new DecimalFractionalNumber(str);
+        this.numberFraction = k.numberFraction;
+        this.sing = k.sing;
+        this.numberInteger = k.numberInteger;
+        this.number = k.number;
     }
 
     public DecimalFractionalNumber(long l) {
-        this.l = l;
-        fraction = "0";
-        integer = "0";
-        str = "";
-        str += l;
-        numberFraction = new ArrayList<>();
-        numberInteger = new ArrayList<>();
-        number = str.split("(?<=\\G.{1})");
-        String[] IntFraction = str.split("\\.");
-        if (IntFraction.length == 1) {
-            integer = IntFraction[0];
-            try {
-                int flag = Integer.parseInt(integer);
-            } catch (NumberFormatException e) {
-                throw new NumberFormatException("Неверный формат числа");
-            }
-        } else {
-            if (IntFraction.length != 2) throw new NumberFormatException("Неверный формат числа");
-            else {
-                fraction = IntFraction[1];
-                integer = IntFraction[0];
-                try {
-                    int flag = Integer.parseInt(integer);
-                    flag = Integer.parseInt(fraction);
-                } catch (NumberFormatException e) {
-                    throw new NumberFormatException("Неверный формат числа");
-                }
-            }
-        }
-        if (number[0].equals("-")) {
-            sing = '-';
-            number[0] = ".";
-        } else sing = '+';
-        int flag = 0;
-        for (int k = 0; k < number.length; k++) {
-            if (number[k].equals(".")) {
-                if (k != 0)
-                    flag = 1;
-            } else {
-                if (flag == 0)
-                    numberInteger.add(Integer.parseInt(number[k]));
-                else numberFraction.add(Integer.parseInt(number[k]));
-            }
-        }
+        String str1 = "";
+        str1 += l;
+        this.str = str1;
+        DecimalFractionalNumber k = new DecimalFractionalNumber(str);
+        this.numberFraction = k.numberFraction;
+        this.sing = k.sing;
+        this.numberInteger = k.numberInteger;
+        this.number = k.number;
     }
 
     public DecimalFractionalNumber(double d) {
-        this.d = d;
-        fraction = "0";
-        integer = "0";
-        str = "";
-        str += d;
-        numberFraction = new ArrayList<>();
-        numberInteger = new ArrayList<>();
-        number = str.split("(?<=\\G.{1})");
-        String[] IntFraction = str.split("\\.");
-
-        if (IntFraction.length == 1) {
-            integer = IntFraction[0];
-            try {
-                int flag = Integer.parseInt(integer);
-            } catch (NumberFormatException e) {
-                throw new NumberFormatException("Неверный формат числа");
-            }
-        } else {
-            if (IntFraction.length != 2) throw new NumberFormatException("Неверный формат числа");
-            else {
-                fraction = IntFraction[1];
-                integer = IntFraction[0];
-                try {
-                    int flag = Integer.parseInt(integer);
-                    flag = Integer.parseInt(fraction);
-                } catch (NumberFormatException e) {
-                    throw new NumberFormatException("Неверный формат числа");
-                }
-            }
-        }
-        if (number[0].equals("-")) {
-            sing = '-';
-            number[0] = ".";
-        } else sing = '+';
-        int flag = 0;
-        for (int k = 0; k < number.length; k++) {
-            if (number[k].equals(".")) {
-                if (k != 0)
-                    flag = 1;
-            } else {
-                if (flag == 0)
-                    numberInteger.add(Integer.parseInt(number[k]));
-                else numberFraction.add(Integer.parseInt(number[k]));
-            }
-        }
+        String str1 = "";
+        str1 += d;
+        this.str = str1;
+        DecimalFractionalNumber k = new DecimalFractionalNumber(str);
+        this.numberFraction = k.numberFraction;
+        this.sing = k.sing;
+        this.numberInteger = k.numberInteger;
+        this.number = k.number;
     }
 
     public DecimalFractionalNumber(float f) {
-        this.f = f;
-        fraction = "0";
-        integer = "0";
-        str = "";
-        str += f;
-        numberFraction = new ArrayList<>();
-        numberInteger = new ArrayList<>();
-        number = str.split("(?<=\\G.{1})");
-        String[] IntFraction = str.split("\\.");
-        if (IntFraction.length == 1) {
-            integer = IntFraction[0];
-            try {
-                int flag = Integer.parseInt(integer);
-            } catch (NumberFormatException e) {
-                throw new NumberFormatException("Неверный формат числа");
-            }
-        } else {
-            if (IntFraction.length != 2) throw new NumberFormatException("Неверный формат числа");
-            else {
-                fraction = IntFraction[1];
-                integer = IntFraction[0];
-                try {
-                    int flag = Integer.parseInt(integer);
-                    flag = Integer.parseInt(fraction);
-                } catch (NumberFormatException e) {
-                    throw new NumberFormatException("Неверный формат числа");
-                }
-            }
-        }
-        if (number[0].equals("-")) {
-            sing = '-';
-            number[0] = ".";
-        } else sing = '+';
-        int flag = 0;
-        for (int k = 0; k < number.length; k++) {
-            if (number[k].equals(".")) {
-                if (k != 0)
-                    flag = 1;
-            } else {
-                if (flag == 0)
-                    numberInteger.add(Integer.parseInt(number[k]));
-                else numberFraction.add(Integer.parseInt(number[k]));
-            }
-        }
+        String str1 = "";
+        str1 += f;
+        this.str = str1;
+        DecimalFractionalNumber k = new DecimalFractionalNumber(str);
+        this.numberFraction = k.numberFraction;
+        this.sing = k.sing;
+        this.numberInteger = k.numberInteger;
+        this.number = k.number;
     }
 
     public String showNumber() {
+        String fraction = "";
+        String integer = "";
+        for(int i = 0; i < numberFraction.size(); i++) {
+            fraction += numberFraction.get(i);
+        }
+        for(int i = 0; i < numberInteger.size(); i++) {
+            integer += numberInteger.get(i);
+        }
         return "Десятичное дробное число: " +
                 str +
                 "; целая часть: " + integer +
@@ -271,7 +119,7 @@ public class DecimalFractionalNumber {
     }
 
     public int toIntIAE() {
-        if ((fraction != "0") || (integer.length() > 32)) throw new IllegalArgumentException("Потеря точности");
+        if ((numberFraction.get(0) != 0) || (numberInteger.size() > 32)) throw new IllegalArgumentException("Потеря точности");
         return Integer.parseInt(str);
     }
 
@@ -280,7 +128,7 @@ public class DecimalFractionalNumber {
     }
 
     public long toLongIAE() {
-        if ((fraction != "0") || (integer.length() > 64)) throw new IllegalArgumentException("Потеря точности");
+        if ((numberFraction.get(0) != 0) || (numberInteger.size() > 64)) throw new IllegalArgumentException("Потеря точности");
         return Long.parseLong(str);
     }
 
@@ -344,21 +192,21 @@ public class DecimalFractionalNumber {
                 if (this.sing == '-') {
                     number[0] = "0";
                 }
-                for (int k = number.length - 1; k >= integer.length() + quantity; k--) {
+                for (int k = number.length - 1; k >= numberInteger.size() + quantity; k--) {
                     number[k] = Integer.toString(Integer.parseInt(number[k]) + temp);
                     temp = 0;
                     if (Integer.parseInt(number[k]) >= 5) temp = 1;
                 }
                 int n = quantity;
-                while (number[integer.length() + n].equals("10") && integer.length() + n != 0) {
-                    number[integer.length() + n] = "0";
-                    if (number[integer.length() + n - 1].equals(".")) {
-                        number[integer.length() + n - 2]
-                                = Integer.toString(Integer.parseInt(number[integer.length() + n - 2]) + 1);
+                while (number[numberInteger.size() + n].equals("10") && numberInteger.size() + n != 0) {
+                    number[numberInteger.size() + n] = "0";
+                    if (number[numberInteger.size() + n - 1].equals(".")) {
+                        number[numberInteger.size() + n - 2]
+                                = Integer.toString(Integer.parseInt(number[numberInteger.size() + n - 2]) + 1);
                         n -= 2;
                     } else {
-                        number[integer.length() + n - 1]
-                                = Integer.toString(Integer.parseInt(number[integer.length() + n - 1]) + 1);
+                        number[numberInteger.size() + n - 1]
+                                = Integer.toString(Integer.parseInt(number[numberInteger.size() + n - 1]) + 1);
                         n -= 1;
                     }
                 }
@@ -368,7 +216,7 @@ public class DecimalFractionalNumber {
                         strResult += "-";
                     }
                 }
-                for (int k = 0; k <= integer.length() + quantity; k++) {
+                for (int k = 0; k <= numberInteger.size() + quantity; k++) {
                     strResult += number[k];
                 }
             } else {
@@ -381,7 +229,7 @@ public class DecimalFractionalNumber {
                 if (n.sing == '-') {
                     n.number[0] = "0";
                 }
-                int t = n.integer.length() - 1;
+                int t = n.numberInteger.size() - 1;
                 while (n.number[t].equals("10") && t != 0) {
                     n.number[t] = "0";
                     n.number[t - 1]
